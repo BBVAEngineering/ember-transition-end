@@ -19,7 +19,7 @@ function createElement() {
 	return element;
 }
 
-module('Unit | Route | on-transition-end', (hooks) => {
+module('Unit | Utils | on-transition-end', (hooks) => {
 	setupTest(hooks);
 
 	hooks.afterEach(() => {
