@@ -1,57 +1,78 @@
-# ember-transition-end
+# cross-transition-end
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+[![Build Status](https://travis-ci.com/BBVAEngineering/cross-tansition-shake.svg?branch=master)](https://travis-ci.com/BBVAEngineering/cross-tansition-shake)
+[![GitHub version](https://badge.fury.io/gh/BBVAEngineering%2Fcross-tansition-shake.svg)](https://badge.fury.io/gh/BBVAEngineering%2Fcross-tansition-shake)
+[![NPM version](https://badge.fury.io/js/cross-tansition-shake.svg)](https://badge.fury.io/js/cross-tansition-shake)
+[![Dependency Status](https://david-dm.org/BBVAEngineering/cross-tansition-shake.svg)](https://david-dm.org/BBVAEngineering/cross-tansition-shake)
+[![codecov](https://codecov.io/gh/BBVAEngineering/cross-tansition-shake/branch/master/graph/badge.svg)](https://codecov.io/gh/BBVAEngineering/cross-tansition-shake)
+[![Greenkeeper badge](https://badges.greenkeeper.io/BBVAEngineering/cross-tansition-shake.svg)](https://greenkeeper.io/)
 
-## Prerequisites
+## Information
 
-You will need the following things properly installed on your computer.
+[![NPM](https://nodei.co/npm/cross-tansition-shake.png?downloads=true&downloadRank=true)](https://nodei.co/npm/cross-tansition-shake/)
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with npm)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+Cross-browser transtionend event listener
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* `cd ember-transition-end`
-* `npm install`
+```
+npm install cross-transition-end
+```
 
-## Running / Development
+## Usage
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+```js
+import crossTransitionEnd from 'cross-transition-end';
 
-### Code Generators
+const element = document.querySelector('#foo');
 
-Make use of the many generators for code, try `ember help generate` for more details
+onTransitionEnd(element, () => {
+    // Do something...
+}, 'all', true);
+```
 
-### Running Tests
+## Arguments
 
-* `ember test`
-* `ember test --server`
+Ordered by position:
 
-### Linting
+### 1º `element`
 
-* `npm run lint:hbs`
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
+type: `HTMLElement`
 
-### Building
+The target element to listen when the animation ends.
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+### 2º `callback`
 
-### Deploying
+type: `Function`
 
-Specify what it takes to deploy your app.
+The callback executed each time the animation ends.
 
-## Further Reading / Useful Links
+### 3º `transition`
 
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+type: `String`
+default: `all`
+
+CSS transition value.
+
+### 4º `once`
+
+type: `Boolean`
+default: `false`
+
+Use `true` when the listener should be triggered once.
+
+## Contribute
+
+If you want to contribute to this addon, please read the [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/BBVAEngineering/cross-tansition-shake/tags).
+
+## Authors
+
+See the list of [contributors](https://github.com/BBVAEngineering/cross-tansition-shake/graphs/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE.md).
