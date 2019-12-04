@@ -1,7 +1,8 @@
 /* eslint no-magic-numbers:0 */
 
 import { module, test } from 'qunit';
-import onTransitionEnd from 'ember-bbva-components/utils/on-transition-end';
+import { setupTest } from 'ember-qunit';
+import onTransitionEnd from 'ember-transition-end/utils/on-transition-end';
 import { spy } from 'sinon';
 
 function createElement() {
@@ -18,7 +19,9 @@ function createElement() {
 	return element;
 }
 
-module('Unit | Utils | on-transition-end', (hooks) => {
+module('Unit | Route | on-transition-end', (hooks) => {
+	setupTest(hooks);
+
 	hooks.afterEach(() => {
 		document.querySelectorAll('.transition-element-test').forEach((el) => el.remove());
 	});
