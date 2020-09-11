@@ -182,4 +182,29 @@ module('Unit | Utils | on-transition-end', (hooks) => {
 
 		setTimeout(step1, 16);
 	});
+
+	test('it returns a remove listener function', (assert) => {
+		const done = assert.async();
+		const element = createElement();
+		const fn = spy();
+
+		appendRoot(element);
+
+		element.style.transition = 'all 50ms linear 0s';
+
+		const removeEventListener = onTransitionEnd(element, fn);
+
+		const step2 = () => {
+			assert.ok(fn.notCalled, 'fn is not called');
+			done();
+		};
+		const step1 = () => {
+			element.style.opacity = 0;
+			setTimeout(step2, 200);
+		};
+
+		removeEventListener();
+
+		setTimeout(step1, 16);
+	});
 });

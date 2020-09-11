@@ -59,6 +59,23 @@ List of options to configure listener:
 |        `once`        | `Boolean` | `false` | Trigger listener only once.                    |
 |     `onlyTarget`     | `Boolean` | `false` | Only listen for transitions on target element. |
 
+## Return value
+
+It returns a `removeEventListener` callback to be used to remove event listener.
+
+```
+import onTransitionEnd from 'ember-transition-end/utils/on-transition-end';
+
+const element = document.querySelector('#foo');
+
+const removeEventListener = onTransitionEnd(element, () => {
+    // Do something...
+});
+
+// remove event listener
+removeEventListener();
+```
+
 ## Contribute
 
 If you want to contribute to this addon, please read the [CONTRIBUTING.md](CONTRIBUTING.md).
