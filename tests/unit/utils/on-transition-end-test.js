@@ -158,6 +158,29 @@ module('Unit | Utils | on-transition-end', (hooks) => {
 		setTimeout(step1, 16);
 	});
 
+	test('it only listens for direct transitions', (assert) => {
+		const done = assert.async();
+		const element = createElement();
+		const fn = spy();
+
+		appendRoot(element);
+
+		element.style.transition = 'all 50ms linear 0s';
+
+		onTransitionEnd(element, fn, { onlyTarget: true });
+
+		const step2 = () => {
+			assert.ok(fn.calledOnce, 'fn is called once');
+			done();
+		};
+		const step1 = () => {
+			element.style.opacity = 0;
+			setTimeout(step2, 200);
+		};
+
+		setTimeout(step1, 16);
+	});
+
 	test('it does not listen for nested transitions', (assert) => {
 		const done = assert.async();
 		const element = document.createElement('div');
