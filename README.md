@@ -28,38 +28,35 @@ const element = document.querySelector('#foo');
 
 onTransitionEnd(element, () => {
     // Do something...
-}, 'all', true);
+}, { transitionProperty: 'all', once: true });
 ```
 
 ## Arguments
 
 Ordered by position:
 
-### 1º `element`
+1. `element`
 
 type: `HTMLElement`
 
 The target element to listen when the animation ends.
 
-### 2º `callback`
+2. `callback`
 
 type: `Function`
 
 The callback executed each time the animation ends.
 
-### 3º `transition`
+3. `options`
 
-type: `String`
-default: `all`
+type: `Object`
 
-CSS transition value.
+List of options to configure listener:
 
-### 4º `once`
-
-type: `Boolean`
-default: `false`
-
-Use `true` when the listener should be triggered once.
+|       Property       |    Type   | Default | Description                 |
+|:--------------------:|:---------:|---------|-----------------------------|
+| `transitionProperty` |  `String` | `all`   | CSS Transition Property.    |
+|        `once`        | `Boolean` | `false` | Trigger listener only once. |
 
 ## Contribute
 

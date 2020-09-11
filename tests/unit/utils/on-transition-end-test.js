@@ -33,7 +33,7 @@ module('Unit | Utils | on-transition-end', (hooks) => {
 
 		element.style.transition = 'background-color 50ms linear 0s';
 
-		onTransitionEnd(element, fn, 'background-color');
+		onTransitionEnd(element, fn, { transitionProperty: 'background-color' });
 
 		const step3 = () => {
 			assert.ok(fn.calledTwice, 'fn is called twice');
@@ -59,7 +59,7 @@ module('Unit | Utils | on-transition-end', (hooks) => {
 
 		element.style.transition = 'background-color 50ms linear 0s';
 
-		onTransitionEnd(element, fn, 'background-color', true);
+		onTransitionEnd(element, fn, { transitionProperty: 'background-color', once: true });
 
 		const step3 = () => {
 			assert.ok(fn.calledOnce, 'fn is still called once');
@@ -86,8 +86,8 @@ module('Unit | Utils | on-transition-end', (hooks) => {
 
 		element.style.transition = 'all 50ms linear 0s';
 
-		onTransitionEnd(element, fnNo, 'opacity');
-		onTransitionEnd(element, fn, 'background-color');
+		onTransitionEnd(element, fnNo, { transitionProperty: 'opacity' });
+		onTransitionEnd(element, fn, { transitionProperty: 'background-color' });
 
 		const step2 = () => {
 			assert.ok(fn.calledOnce, 'fn is called once');

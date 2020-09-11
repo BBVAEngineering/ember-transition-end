@@ -30,10 +30,9 @@ const transitionEndEventName = findTransitionEventName();
  * @method onTransitionEnd
  * @param {Element} element
  * @param {Function} callback
- * @param {String} transitionProperty
- * @param {Boolean} once
+ * @param {Object} options
  */
-export default function onTransitionEnd(element, callback, transitionProperty = 'all', once = false) {
+export default function onTransitionEnd(element, callback, { transitionProperty = 'all', once = false } = {}) {
 	const fn = (e) => {
 		const { propertyName, type } = e;
 
