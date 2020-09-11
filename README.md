@@ -5,7 +5,6 @@
 [![NPM version](https://badge.fury.io/js/ember-transition-end.svg)](https://badge.fury.io/js/ember-transition-end)
 [![Dependency Status](https://david-dm.org/BBVAEngineering/ember-transition-end.svg)](https://david-dm.org/BBVAEngineering/ember-transition-end)
 [![codecov](https://codecov.io/gh/BBVAEngineering/ember-transition-end/branch/master/graph/badge.svg)](https://codecov.io/gh/BBVAEngineering/ember-transition-end)
-[![Greenkeeper badge](https://badges.greenkeeper.io/BBVAEngineering/ember-transition-end.svg)](https://greenkeeper.io/)
 
 ## Information
 
