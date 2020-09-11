@@ -14,9 +14,11 @@ function createElement() {
 	element.style.width = '200px';
 	element.style.height = '200px';
 
-	document.getElementById('ember-testing').appendChild(element);
-
 	return element;
+}
+
+function appendRoot(element) {
+	document.getElementById('ember-testing').appendChild(element);
 }
 
 module('Unit | Utils | on-transition-end', (hooks) => {
@@ -30,6 +32,8 @@ module('Unit | Utils | on-transition-end', (hooks) => {
 		const done = assert.async();
 		const element = createElement();
 		const fn = spy();
+
+		appendRoot(element);
 
 		element.style.transition = 'background-color 50ms linear 0s';
 
@@ -56,6 +60,8 @@ module('Unit | Utils | on-transition-end', (hooks) => {
 		const done = assert.async();
 		const element = createElement();
 		const fn = spy();
+
+		appendRoot(element);
 
 		element.style.transition = 'background-color 50ms linear 0s';
 
@@ -84,6 +90,8 @@ module('Unit | Utils | on-transition-end', (hooks) => {
 		const fn = spy();
 		const fnNo = spy();
 
+		appendRoot(element);
+
 		element.style.transition = 'all 50ms linear 0s';
 
 		onTransitionEnd(element, fnNo, { transitionProperty: 'opacity' });
@@ -107,6 +115,8 @@ module('Unit | Utils | on-transition-end', (hooks) => {
 		const element = createElement();
 		const fn = spy();
 
+		appendRoot(element);
+
 		element.style.transition = 'all 50ms linear 0s';
 
 		onTransitionEnd(element, fn);
@@ -117,6 +127,56 @@ module('Unit | Utils | on-transition-end', (hooks) => {
 		};
 		const step1 = () => {
 			element.style.opacity = 0;
+			setTimeout(step2, 200);
+		};
+
+		setTimeout(step1, 16);
+	});
+
+	test('it listens for nested transitions', (assert) => {
+		const done = assert.async();
+		const element = document.createElement('div');
+		const nested = createElement();
+		const fn = spy();
+
+		element.appendChild(nested);
+		appendRoot(element);
+
+		nested.style.transition = 'all 50ms linear 0s';
+
+		onTransitionEnd(element, fn);
+
+		const step2 = () => {
+			assert.ok(fn.calledOnce, 'fn is called once');
+			done();
+		};
+		const step1 = () => {
+			nested.style.opacity = 0;
+			setTimeout(step2, 200);
+		};
+
+		setTimeout(step1, 16);
+	});
+
+	test('it does not listen for nested transitions', (assert) => {
+		const done = assert.async();
+		const element = document.createElement('div');
+		const nested = createElement();
+		const fn = spy();
+
+		element.appendChild(nested);
+		appendRoot(element);
+
+		nested.style.transition = 'all 50ms linear 0s';
+
+		onTransitionEnd(element, fn, { onlyTarget: true });
+
+		const step2 = () => {
+			assert.ok(fn.notCalled, 'fn is not called');
+			done();
+		};
+		const step1 = () => {
+			nested.style.opacity = 0;
 			setTimeout(step2, 200);
 		};
 

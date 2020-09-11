@@ -53,10 +53,11 @@ type: `Object`
 
 List of options to configure listener:
 
-|       Property       |    Type   | Default | Description                 |
-|:--------------------:|:---------:|---------|-----------------------------|
-| `transitionProperty` |  `String` | `all`   | CSS Transition Property.    |
-|        `once`        | `Boolean` | `false` | Trigger listener only once. |
+|       Property       |    Type   | Default | Description                                    |
+|:--------------------:|:---------:|---------|------------------------------------------------|
+| `transitionProperty` |  `String` | `all`   | CSS Transition Property.                       |
+|        `once`        | `Boolean` | `false` | Trigger listener only once.                    |
+|     `onlyTarget`     | `Boolean` | `false` | Only listen for transitions on target element. |
 
 ## Contribute
 
