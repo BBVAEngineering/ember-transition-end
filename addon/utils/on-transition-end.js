@@ -30,23 +30,34 @@ const transitionEndEventName = findTransitionEventName();
  * @method onTransitionEnd
  * @param {Element} element
  * @param {Function} callback
- * @param {String} transitionProperty
- * @param {Boolean} once
+ * @param {Object} options
  */
-export default function onTransitionEnd(element, callback, transitionProperty = 'all', once = false) {
-	const fn = (e) => {
-		const { propertyName, type } = e;
+export default function onTransitionEnd(element, callback, options = {}) {
+	const { transitionProperty = 'all', once = false, onlyTarget = false } = options;
+
+	function transitionCallback(e) {
+		const { propertyName, target } = e;
+
+		if (onlyTarget && target !== element) {
+			return;
+		}
 
 		if (transitionProperty !== 'all' && propertyName !== transitionProperty) {
 			return;
 		}
 
 		if (once) {
-			element.removeEventListener(type, fn, true);
+			removeEventListener();
 		}
 
 		run(null, callback, e);
-	};
+	}
 
-	element.addEventListener(transitionEndEventName, fn, true);
+	function removeEventListener() {
+		element.removeEventListener(transitionEndEventName, transitionCallback, true);
+	}
+
+	element.addEventListener(transitionEndEventName, transitionCallback, true);
+
+	return removeEventListener;
 }

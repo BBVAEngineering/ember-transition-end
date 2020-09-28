@@ -5,7 +5,6 @@
 [![NPM version](https://badge.fury.io/js/ember-transition-end.svg)](https://badge.fury.io/js/ember-transition-end)
 [![Dependency Status](https://david-dm.org/BBVAEngineering/ember-transition-end.svg)](https://david-dm.org/BBVAEngineering/ember-transition-end)
 [![codecov](https://codecov.io/gh/BBVAEngineering/ember-transition-end/branch/master/graph/badge.svg)](https://codecov.io/gh/BBVAEngineering/ember-transition-end)
-[![Greenkeeper badge](https://badges.greenkeeper.io/BBVAEngineering/ember-transition-end.svg)](https://greenkeeper.io/)
 
 ## Information
 
@@ -28,38 +27,53 @@ const element = document.querySelector('#foo');
 
 onTransitionEnd(element, () => {
     // Do something...
-}, 'all', true);
+}, { transitionProperty: 'all', once: true });
 ```
 
 ## Arguments
 
 Ordered by position:
 
-### 1º `element`
+1. `element`
 
 type: `HTMLElement`
 
 The target element to listen when the animation ends.
 
-### 2º `callback`
+2. `callback`
 
 type: `Function`
 
 The callback executed each time the animation ends.
 
-### 3º `transition`
+3. `options`
 
-type: `String`
-default: `all`
+type: `Object`
 
-CSS transition value.
+List of options to configure listener:
 
-### 4º `once`
+|       Property       |    Type   | Default | Description                                    |
+|:--------------------:|:---------:|---------|------------------------------------------------|
+| `transitionProperty` |  `String` | `all`   | CSS Transition Property.                       |
+|        `once`        | `Boolean` | `false` | Trigger listener only once.                    |
+|     `onlyTarget`     | `Boolean` | `false` | Only listen for transitions on target element. |
 
-type: `Boolean`
-default: `false`
+## Return value
 
-Use `true` when the listener should be triggered once.
+It returns a `removeEventListener` callback to be used to remove event listener.
+
+```
+import onTransitionEnd from 'ember-transition-end/utils/on-transition-end';
+
+const element = document.querySelector('#foo');
+
+const removeEventListener = onTransitionEnd(element, () => {
+    // Do something...
+});
+
+// remove event listener
+removeEventListener();
+```
 
 ## Contribute
 
